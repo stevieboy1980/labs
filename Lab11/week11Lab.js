@@ -15,7 +15,7 @@
  * POST      
  * Endpoint 
  * Anonymous function 
- *
+ * JSON Stringify - Converts JSON data into a string format
  *                                        
  * Objectives: 
  * Accessing element values by DOM manipulation 
@@ -186,14 +186,21 @@ $(".test").on("click", function(){
 	let fname = $('#firstname').val();
 	let lname = $('#lastname').val();
 	let grade = $('#grade').val();
-	
-	$.post("http://localhost:3000/gradebook", 
-			{ 
+
+	//Before posting or even updating data to the API you will need to stringify the data.
+	/*
+ 	JSON.stringify() converts a JavaScript object or value to a JSON string. We use it to easily store or send data as a text format.
+  	This way, the data can be easily shared and understood by the other API system receiving it.
+   	
+    	JS MDN DOC: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+	*/
+	let newGradeBookData = JSON.stringify({ 
 					"firstname": fname,
 					"lastname": lname,
 					"grade": grade    
-			}
-	);
+			});
+	
+	$.post("http://localhost:3000/gradebook",newGradeBookData);
 
 });
 /*
